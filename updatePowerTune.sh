@@ -4,14 +4,18 @@ if nc -zw5 www.github.com 443; then
 		if [ -d /home/pi/src ]; then
 		echo "Updating to latest source "
 		cd /home/pi/src
+		git reset --hard
+		git clean -fd
 		git pull
 		./updatedaemons.sh
+		./updateUserDashboards.sh
 		else
 		echo "Create source directory and clone PowerTune Repo"
 		mkdir /home/pi/src
 		git clone https://github.com/BastianGschrey/PowerTune.git /home/pi/src  
 		cd src
 		./updatedaemons.sh
+		./updateUserDashboards.sh
 		fi
 # Check if the Logo Folder Exists
 		if [ -d /home/pi/Logo ]; then
